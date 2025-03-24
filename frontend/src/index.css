@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..400&family=Josefin+Sans:ital,wght@0,200;1,100&family=Julius+Sans+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Color+Emoji&family=Playwrite+BE+WAL:wght@100..400&family=Poppins:ital,wght@0,500;1,600&family=Protest+Revolution&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme{
+    --font-SansOne: "Julius Sans One", sans-serif;
+    --font-comfortaa:"Comfortaa", sans-serif;
+    --font-protest:"Protest Revolution", sans-serif;
+    --font-poppins:"Poppins", sans-serif;
+    --font-josefin:"Josefin Sans", sans-serif;
+}

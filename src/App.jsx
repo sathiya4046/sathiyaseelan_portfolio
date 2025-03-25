@@ -29,7 +29,7 @@ function App() {
           theme = {theme}  
         />
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/sathiyaseelan_portfolio" element={<Home/>}/>
           <Route path="/experience" element={<Experience/>}/>
           <Route path="/projects" element={<Projects/>}/>
           <Route path="/education" element={<Education/>}/>

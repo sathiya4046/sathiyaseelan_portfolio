@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import toast from 'react-hot-toast';
 import Social from '../navbar/menu/Social';
 import { motion } from "motion/react"
-import { baseUrl } from '../../constant/url';
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
+
   const [values, setValues]= useState([{
     name:"",
     email:"",
@@ -17,21 +17,23 @@ const Contact = () => {
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
-    try{
-      await axios.post(`${baseUrl}/message`, values);
-      toast.success("Message sent...")
-      setValues({
-      name:"",
-      email:"",
-      message:""
-    })
-    }catch(error){
-      toast.error(`Error: ${error}`)
-    }
+      emailjs.sendForm(import.meta.env.VITE_SERVICE_ID,import.meta.env.VITE_TEMPLATE_ID,e.target,import.meta.env.VITE_PUBLIC_KEY)
+      .then((response) => {
+          console.log(response)
+          toast.success("Message sent...")
+          setValues({
+          name:"",
+          email:"",
+          message:""
+        })})
+      .catch((error)=>{
+          toast.error(`Error: ${error}`)
+      })
+      
   }
 
   return (
-          <section className="hero h-fit py-28 lg:pt-52">
+          <section className="h-fit py-28 lg:pt-52">
               <motion.div 
                 initial={{opacity:0, scale:0}} 
                 whileInView={{opacity:1, scale:1}}
@@ -45,7 +47,7 @@ const Contact = () => {
                   <Social/>
 
                 </div>
-                <div className="card w-full max-w-sm md:max-w-md xl:max-w-lg shrink-0 ">
+                <div className="card w-full max-w-sm md:max-w-sm xl:max-w-lg shrink-0 ">
                 <form className='card-body text-start flex flex-col w-full' onSubmit={handleSubmit}>
                 <input 
                   className='mt-3 p-4 border rounded border-gray-400' 
@@ -54,6 +56,7 @@ const Contact = () => {
                   name='name'
                   value={values.name}
                   onChange={onChange}
+                  required
                 />
                 <input 
                   className='mt-3 p-4 border rounded border-gray-400' 
@@ -62,6 +65,7 @@ const Contact = () => {
                   name='email'
                   value={values.email}
                   onChange={onChange}
+                  required
                 />
                 <textarea 
                   className='mt-3 p-4  border rounded border-gray-400' 
@@ -71,6 +75,7 @@ const Contact = () => {
                   cols={3}
                   value={values.message}
                   onChange={onChange}
+                  required
                 ></textarea>
                 <button type="submit" className="btn btn-neutral mt-3 p-2">Submit</button>
               </form>

@@ -4,7 +4,6 @@ import {
   FaGithub,
   FaInstagram,
   FaLinkedin,
-  FaVoicemail,
 
 } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -12,7 +11,7 @@ import {Link} from 'react-router-dom'
 
 const Social = () => {
   return (
-    <div dir='ltr' className="flex justify-center gap-6 text-3xl">
+    <div dir='ltr' className="flex justify-center gap-6 text-xl md:text-3xl">
                     <Link
                       to={"https://www.linkedin.com/in/sathiya4046/"}
                       className="tooltip tooltip-bottom ms-2 p-3 shadow shadow-cyan-400 rounded-full hover:-translate-y-1.5 transform transition duration-500 hover:shadow-xl"

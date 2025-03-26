@@ -24,7 +24,7 @@ const Sidebar = ({theme}) => {
           <h2 className=" bg-gradient-to-r from-red-700 via-pink-600 to-indigo-600 bg-clip-text text-transparent text-4xl font-bold pb-2 font-poppins">Sathiyaseelan</h2>
             <RxCross1 onClick={toggleSidebar} className='text-5xl cursor-pointer p-3 shadow shadow-cyan-400 rounded-full hover:-translate-y-1.5 transform transition duration-500 hover:shadow-xl' />
         </div>
-        <MenuList theme={theme}/>
+        <MenuList toggleSidebar={toggleSidebar} theme={theme}/>
         <Social/>
       </div>
     </div>

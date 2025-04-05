@@ -33,12 +33,12 @@ const Contact = () => {
   }
 
   return (
-          <section className="h-fit py-28 lg:pt-52">
+          <section className="h-svh py-38 lg:pt-52">
               <motion.div 
                 initial={{opacity:0, scale:0}} 
                 whileInView={{opacity:1, scale:1}}
                 transition={{duration:1}} 
-                className="hero-content w-full justify-around flex-col lg:flex-row">
+                className="hero-content mx-auto  w-full justify-around flex-col lg:flex-row">
                 <div className="text-center">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">Feel free to contact !</h1>
                   <p className="py-6">
@@ -48,7 +48,7 @@ const Contact = () => {
 
                 </div>
                 <div className="card w-full max-w-sm md:max-w-sm xl:max-w-lg shrink-0 ">
-                <form className='card-body text-start flex flex-col w-full' onSubmit={handleSubmit}>
+                <form className='card-body flex flex-col w-full' onSubmit={handleSubmit}>
                 <input 
                   className='mt-3 p-4 border rounded border-gray-400' 
                   type="text" 

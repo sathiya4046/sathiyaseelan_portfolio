@@ -2,7 +2,7 @@ import React from 'react'
 
 const Education = () => {
   return (
-    <section className=" py-28 lg:pt-52">
+    <section className="h-svh py-38 lg:pt-52">
           <h1 className="text-3xl md:text-4xl text-center font-bold mb-10">Education</h1>
           <div className=' lg:w-[80%] xl:w-[60%] lg:mx-auto'>
             <div className=' overflow-x-auto'>

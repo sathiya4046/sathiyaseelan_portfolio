@@ -15,8 +15,8 @@ const Experience = () => {
                     className="grid md:grid-cols-2 gap-10">
                 <dl data-aos="fade-down-right" className="space-y-2 mt-3 p-md-4 mx-auto text-justify p-4">
                   <dt><h5 className='text-xl md:text-2xl'>Jaya info-soft Pvt ltd, Chennai</h5> </dt>
-                  <dd className='font-semibold'>Frontend Developer </dd>
-                  <dd><small className='font-josefin'> Apr 2023 - Present</small> </dd>
+                  <dd className='font-semibold'>Web Developer </dd>
+                  <dd><small className='font-josefin'> Aug 2023 - Present</small> </dd>
                   <hr/>
                   <dd>
                   <ul className='space-y-4 font-mono text-justify'>
@@ -33,7 +33,7 @@ const Experience = () => {
                 <dl data-aos="fade-down-left" className="space-y-2 mt-3 mx-auto text-justify p-4">
                 <dt><h5 className='text-xl md:text-2xl'>City centre, Cambodia </h5> </dt>
                   <dd><h5 className='font-semibold'>Customer Support </h5></dd>
-                  <dd><small className='font-josefin'>Apr 2022 – Mar 2023</small></dd>
+                  <dd><small className='font-josefin'>Apr 2022 – Jul 2023</small></dd>
                   <hr/>
                   <dd>
                   <ul className='space-y-4 text-justify font-mono'>

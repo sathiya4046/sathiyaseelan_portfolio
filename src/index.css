@@ -10,3 +10,33 @@
     --font-poppins:"Poppins", sans-serif;
     --font-josefin:"Josefin Sans", sans-serif;
 }
+
+/* Hide scrollbar for all */
+html {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+html::-webkit-scrollbar {
+  display: none; 
+}
+
+
+/* for skill section */
+
+.hide-scrollbar {
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
+
+/* experiences section */
+.scrollbar-hidden {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari */
+}

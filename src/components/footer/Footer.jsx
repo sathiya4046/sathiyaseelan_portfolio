@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import NameBoard from '../navbar/menu/NameBoard'
 
 const Footer = () => {
   return (
-    <div className="text-center py-10 ">
-        Copyrights &copy; {new Date().getFullYear()} &rarr;
-        <Link className=' bg-gradient-to-r from-red-700 via-pink-600 to-indigo-600 bg-clip-text text-transparent text-xl font-bold pb-2 font-poppins' to={'/sathiyaseelan_portfolio'}> Sathiyaseelan</Link>
-    </div>
+    <footer className="flex gap-3 justify-center text-center py-10 ">
+        <div>
+          Copyrights &copy; {new Date().getFullYear()} &rarr;
+        </div>
+        <Link className="bg-clip-text text-transparent" to={'/sathiyaseelan_portfolio'}>
+            <NameBoard 
+              name={"Sathiyaseelan"}
+              className="text-xl font-extrabold tracking-wider font-SansOne"
+              colors={["#8e44ad", "#e91e63", "#f39c12", "#8e44ad"]}
+            />
+        </Link>
+    </footer>
   )
 }
 

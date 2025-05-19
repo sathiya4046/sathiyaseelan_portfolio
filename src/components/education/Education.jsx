@@ -30,7 +30,7 @@ const Education = () => {
 
   return (
     <motion.section 
-      className="lg:w-[80%] lg:mx-auto mx-10 min-h-screen py-28 lg:pt-40"
+      className="lg:w-[80%] lg:mx-auto mx-5 min-h-screen py-28 lg:pt-40"
       ref={ref}
       initial={{ opacity: 0 }}
       animate={inView ? { opacity: 1 } : {}}

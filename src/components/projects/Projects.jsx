@@ -184,7 +184,7 @@ const Projects = () => {
 
   return (
     <section
-      className="lg:w-[80%] lg:mx-auto mx-10 py-28 lg:pt-40"
+      className="lg:w-[80%] lg:mx-auto py-28 lg:pt-40"
     >
       <motion.h1
         className="text-3xl md:text-4xl text-center font-bold mb-10"

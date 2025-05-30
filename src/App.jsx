@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "./components/navbar/Header";
 import Home from './components/home/Home'
-import Experience from './components/experience/Experience'
 import Projects from './components/projects/Projects'
 import Contact from './components/contact/Contact'
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -86,16 +85,6 @@ function App() {
               onAnimationComplete={() => setIsFirstMount(false)}
             >
               <Home theme={theme}/>
-            </motion.div>
-          }/>
-          <Route path="/experience" element={
-            <motion.div
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <Experience />
             </motion.div>
           }/>
           <Route path="/projects" element={

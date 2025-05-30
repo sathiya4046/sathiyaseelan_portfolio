@@ -3,15 +3,15 @@ import { motion } from 'framer-motion';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import NameBoard from '../navbar/menu/NameBoard';
 import Skills from './skills/Skills';
-import Experiences from '../../Experiences';
+import Experiences from '../experience/Experiences';
 
 const Home = () => {
 
   const [text] = useTypewriter({
-    words: ['Full Stack web Developer', 'Frontend Developer', 'Backend Developer','Freelancer'],
+    words: ['Full Stack Web-Developer', 'Front-end Developer', 'Back-end Developer','Freelancer','Software Tester'],
     loop: true,
-    typeSpeed: 150,
-    deleteSpeed: 100,
+    typeSpeed: 200,
+    deleteSpeed: 150,
   });
 
   return (

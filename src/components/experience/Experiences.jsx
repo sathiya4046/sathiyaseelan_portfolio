@@ -3,16 +3,15 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-import { experienceData } from "./data/experienceData";
+import { experienceData } from "../../data/experienceData";
 
 
 const Row = ({ exp, innerRef }) => {
-  const [expanded, setExpanded] = useState(false);           // ⬅ local toggle
-  const extraRef = useRef([]);                               // refs for animating extras
+  const [expanded, setExpanded] = useState(false);        
+  const extraRef = useRef([]);                               
 
   const visiblePoints = expanded ? exp.points : exp.points.slice(0, 2);
 
-  // animate extra items when we flip to “expanded”
   useLayoutEffect(() => {
     if (expanded && extraRef.current.length) {
       gsap.fromTo(
@@ -44,7 +43,7 @@ const Row = ({ exp, innerRef }) => {
               key={i}
               ref={
                 i > 1
-                  ? (el) => (extraRef.current[i - 2] = el) // store refs only for the “extra” ones
+                  ? (el) => (extraRef.current[i - 2] = el) 
                   : null
               }
               className="opacity-0 translate-y-3 text-gray-400"
@@ -55,7 +54,6 @@ const Row = ({ exp, innerRef }) => {
           ))}
         </ul>
 
-        {/* toggle button */}
         {exp.points.length > 2 && (
           <button
             onClick={() => setExpanded((p) => !p)}
@@ -75,7 +73,6 @@ export default function Experiences() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       rowsRef.current.forEach((row, i) => {
-        // initial off‑screen state
         gsap.set(row, {
           opacity: 0,
           y: 80,
@@ -83,7 +80,6 @@ export default function Experiences() {
         });
         gsap.set(row.querySelectorAll("li, h4"), { opacity: 0, y: 20 });
 
-        // scroll‑trigger reveal
         ScrollTrigger.create({
           trigger: row,
           start: "top 70%",

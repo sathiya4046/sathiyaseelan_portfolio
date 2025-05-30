@@ -92,7 +92,7 @@ function Resume() {
           </motion.div>
         </Document>
         
-        <Document file={pdf} className="flex justify-center mt-4">
+        {/* <Document file={pdf} className="flex justify-center mt-4">
           <motion.div
             variants={pageVariants}
             initial="hidden"
@@ -106,7 +106,7 @@ function Resume() {
               renderAnnotationLayer={false}
             />
           </motion.div>
-        </Document>
+        </Document> */}
       </div>
 
       <motion.div 

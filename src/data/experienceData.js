@@ -2,7 +2,7 @@ export const experienceData = [
   {
     company: 'Jaya info-soft Pvt ltd, Chennai',
     role: 'Web Developer',
-    duration: 'Aug 2023 - Present',
+    duration: 'Nov 2023 - Present',
     points: [
         'Developed responsive and user-friendly interfaces that work on all devices, ensuring reusable code for future projects.',
         'Collaborated with designers and backend developers to integrate APIs and ensure smooth data flow, validating user input before backend submission.',

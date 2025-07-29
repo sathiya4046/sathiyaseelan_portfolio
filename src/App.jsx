@@ -11,6 +11,8 @@ import Resume from "./components/resume/Resume";
 import { Toaster } from "react-hot-toast";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+// import TimeLine from "./Timeline";
+// import StarsC from "./components/canvas/Stars";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,12 +69,32 @@ function App() {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: lineRef.current,
+        start: "top center",
+        end: "bottom bottom",
+        scrub: 1,
+      },
+    });
+
+    tl.to(lineRef.current, {
+      height: "100%",
+      ease: "none",
+    });
+  }, []);
+
   return (
     <main ref={appRef} data-theme={theme} className="font-comfortaa overflow-x-hidden w-[90%] mx-auto">
+      
       <Header 
         toggleTheme={toggleTheme}
         theme={theme} 
       />
+      {/* <TimeLine/> */}
       
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
@@ -85,9 +107,10 @@ function App() {
               onAnimationComplete={() => setIsFirstMount(false)}
             >
               <Home theme={theme}/>
+              {/* <StarsC/> */}
             </motion.div>
           }/>
-          <Route path="/projects" element={
+          <Route path="/services" element={
             <motion.div
               variants={pageVariants}
               initial="initial"
@@ -97,7 +120,7 @@ function App() {
               <Projects />
             </motion.div>
           }/>
-          <Route path="/education" element={
+          {/* <Route path="/education" element={
             <motion.div
               variants={pageVariants}
               initial="initial"
@@ -106,7 +129,7 @@ function App() {
             >
               <Education />
             </motion.div>
-          }/>
+          }/> */}
           <Route path="/contact" element={
             <motion.div
               variants={pageVariants}
@@ -117,7 +140,7 @@ function App() {
               <Contact />
             </motion.div>
           }/>
-          <Route path="/resume" element={
+          {/* <Route path="/resume" element={
             <motion.div
               variants={pageVariants}
               initial="initial"
@@ -126,7 +149,7 @@ function App() {
             >
               <Resume />
             </motion.div>
-          }/>
+          }/> */}
         </Routes>
       </AnimatePresence>
 

@@ -49,7 +49,7 @@ const Header = ({ toggleTheme, theme,themeSwitchRef }) => {
       </nav>
       <nav 
         data-theme={theme} 
-        className="hidden lg:flex relative top-5 justify-evenly rounded-4xl w-[40rem] mx-auto navbar cursor-pointer border-b-2"
+        className="hidden lg:flex relative top-5 justify-evenly rounded-4xl w-[30rem] mx-auto navbar cursor-pointer border-b-2"
       >
         <MenuList  toggleSidebar={toggleSidebar} theme={theme}/>
         <Dark 

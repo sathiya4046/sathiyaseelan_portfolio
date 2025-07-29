@@ -16,7 +16,10 @@
     "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
     "@mantine/core": "^8.0.1",
+    "@react-three/drei": "^9.57.1",
+    "@react-three/fiber": "^8.12.0",
     "@tailwindcss/vite": "^4.0.14",
+    "maath": "^0.5.2",
     "@types/gsap": "^3.0.0",
     "aos": "^2.3.4",
     "framer-motion": "^12.12.1",
@@ -33,12 +36,13 @@
     "react-simple-typewriter": "^5.0.1",
     "tailwind-scrollbar-hide": "^2.0.0",
     "tailwindcss": "^4.0.14",
-    "typewriter-effect": "^2.21.0"
+    "typewriter-effect": "^2.21.0",
+    "three": "^0.150.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^4.3.4",
     "daisyui": "^5.0.6",
     "eslint": "^9.21.0",

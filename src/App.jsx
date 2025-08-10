@@ -110,7 +110,7 @@ function App() {
               {/* <StarsC/> */}
             </motion.div>
           }/>
-          <Route path="/services" element={
+          {/* <Route path="/services" element={
             <motion.div
               variants={pageVariants}
               initial="initial"
@@ -119,7 +119,7 @@ function App() {
             >
               <Projects />
             </motion.div>
-          }/>
+          }/> */}
           {/* <Route path="/education" element={
             <motion.div
               variants={pageVariants}

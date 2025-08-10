@@ -22,7 +22,7 @@ const MenuList = ({ toggleSidebar, theme }) => {
       <ul className="font-josefin font-semibold lg:flex gap-5 justify-center items-center lg:text-sm text-2xl tracking-widest lg:space-y-0 space-y-6 lg:px-0 px-10 pt-4 pb-24 lg:pb-0">
         {[
           { path: "/sathiyaseelan_portfolio", text: "Home" },
-          { path: "/services", text: "Services" },
+          // { path: "/services", text: "Services" },
           // { path: "/education", text: "Education" },
           // { path: "/resume", text: "Resume" },
           { path: "/contact", text: "Contact" }

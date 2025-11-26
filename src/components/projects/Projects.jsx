@@ -6,6 +6,8 @@ import chat from "../../assets/images/chat.png";
 import netflix from "../../assets/images/netflix.png";
 import notes from "../../assets/images/notes thumbnail.png";
 import xClone from "../../assets/images/x-clone.png";
+import ownway from "../../assets/images/ownway.png";
+import servi from "../../assets/images/servizzone.png";
 
 const ProjectCard = ({ project }) => {
   const [ref, inView] = useInView({
@@ -25,7 +27,7 @@ const ProjectCard = ({ project }) => {
         duration: 0.5,
       },
     },
-    exit: { opacity: 0, y: -50 }
+    exit: { opacity: 0, y: -50 },
   };
 
   const listVariants = {
@@ -113,16 +115,27 @@ const ProjectCard = ({ project }) => {
   );
 };
 
-
 const Projects = () => {
-
   const lists = [
     {
-      heading: "Twitter Clone",
+      heading: "Servizzone",
+      stack: "Next js,Reactjs, Tailwind CSS, Nodejs, MongoDB",
+      image: servi,
+      view: "https://www.servizzone.com/",
+      desc: [
+        "Built a full-stack social media platform using the MERN stack with Next.js for the frontend and Node.js/Express for backend APIs, enabling users to perform complete CRUD operations.",
+        "Implemented TanStack Query for efficient server-state management, background data synchronization, caching, and real-time UI updates.",
+        "Developed responsive and modern UI components using React.js and Tailwind CSS, ensuring seamless performance across all screen sizes.",
+        "Integrated secure user authentication with JWT-based login, protected routes, and session handling to safeguard user data.",
+        "Designed and optimized MongoDB database schemas for scalable data storage and faster query performance.",
+      ],
+    },
+    {
+      heading: "Ownway Tech",
       stack:
-        "Reactjs,Material UI, Bootstrap, Nodejs, Expressjs, MongoDB, JWT, TanStack Query",
-      image: xClone,
-      view: "https://x-clone-dnl2.onrender.com/",
+        "Reactjs, Tailwind, Nodejs, MongoDB",
+      image: ownway,
+      view: "https://ownwaytech.com/",
       desc: [
         "Developed a MERN complete full stack social media website, user can do crud operation with the help of tanstack",
         "Dynamic and responsive user interfaces using React.js, Material UI and Bootstrap ensuring compatibility across various devices and screen sizes.",
@@ -183,9 +196,7 @@ const Projects = () => {
   ];
 
   return (
-    <section
-      className="lg:w-[80%] lg:mx-auto py-28 lg:pt-40"
-    >
+    <section className="lg:w-[80%] lg:mx-auto py-28 lg:pt-40">
       <motion.h1
         className="text-3xl md:text-4xl text-center font-bold mb-10"
         initial={{ opacity: 0, y: 100 }}
@@ -198,7 +209,7 @@ const Projects = () => {
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 m-3">
         {lists.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+          <ProjectCard key={index} project={project} />
         ))}
       </div>
     </section>

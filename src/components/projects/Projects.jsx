@@ -1,217 +1,257 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import ecom from "../../assets/images/ecom.png";
-import chat from "../../assets/images/chat.png";
-import netflix from "../../assets/images/netflix.png";
-import notes from "../../assets/images/notes thumbnail.png";
-import xClone from "../../assets/images/x-clone.png";
-import ownway from "../../assets/images/ownway.png";
-import servi from "../../assets/images/servizzone.png";
+import { projectsData, projectCategories } from "../../data/projectsData";
 
-const ProjectCard = ({ project }) => {
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 18,
+      delay: i * 0.08,
+    },
+  }),
+};
+
+const ProjectCard = ({ project, index, onOpenDetail }) => {
   const [ref, inView] = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
+    triggerOnce: true,
+    threshold: 0.08,
+    rootMargin: "0px 0px -40px 0px",
   });
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 0.5,
-      },
-    },
-    exit: { opacity: 0, y: -50 },
-  };
-
-  const listVariants = {
-    visible: {
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-    hidden: {
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    visible: { opacity: 1, x: 0 },
-    hidden: { opacity: 0, x: -20 },
-  };
-
   return (
-    <motion.div
+    <motion.article
       ref={ref}
       variants={cardVariants}
       initial="hidden"
-      animate={inView ? "visible" : "exit"}
-      className="relative md:max-w-md mx-auto sm:mx-0 overflow-hidden space-y-4 shadow-lg rounded-xl p-4"
+      animate={inView ? "visible" : "hidden"}
+      custom={index}
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-base-300 bg-base-200/50 shadow-lg transition-shadow hover:shadow-xl"
     >
-      <motion.img
-        src={project.image}
-        alt="Project"
-        className="rounded-lg w-full h-48 object-cover"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 200 }}
-      />
-
-      <div>
-        <h1 className="text-xl md:text-2xl font-bold">{project.heading}</h1>
-        <motion.small
-          className="font-josefin text-gray-300"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          {project.stack}
-        </motion.small>
+      <div className="relative aspect-video overflow-hidden bg-base-300">
+        <motion.img
+          src={project.image}
+          alt={project.heading}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-base-200/90 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
 
-      <motion.div
-        className="mb-15"
-        variants={listVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-      >
-        {project.desc.map((list, index) => (
-          <motion.ul
-            key={index}
-            className="text-justify font-mono"
-            variants={itemVariants}
-          >
-            <li className="mb-2">
-              <em>
-                <span className="bg-gradient-to-r from-red-700 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
-                  ==&gt;
-                </span>{" "}
-                {list}
-              </em>
-            </li>
-          </motion.ul>
-        ))}
-      </motion.div>
+      <div className="flex flex-1 flex-col p-4">
+        <h2 className="text-lg font-bold tracking-tight md:text-xl">
+          {project.heading}
+        </h2>
+        <p className="mb-3 font-mono text-xs text-base-content/70">
+          {project.stack}
+        </p>
 
-      <motion.a
-        href={project.view}
-        className="absolute bottom-0 w-full btn btn-neutral mt-3 p-2"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 300 }}
+        <ul className="mb-4 flex-1 space-y-1.5 text-sm text-base-content/80">
+          {project.desc.slice(0, 3).map((item, i) => (
+            <li key={i} className="flex gap-2">
+              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+              <span className="line-clamp-2">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-2">
+          <motion.a
+            href={project.view}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary btn-sm flex-1 min-w-0"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Live Demo
+          </motion.a>
+          {project.github && (
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline btn-sm"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Code
+            </motion.a>
+          )}
+          <motion.button
+            type="button"
+            onClick={() => onOpenDetail(project)}
+            className="btn btn-ghost btn-sm"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Details
+          </motion.button>
+        </div>
+      </div>
+    </motion.article>
+  );
+};
+
+const ProjectDetailModal = ({ project, onClose }) => {
+  if (!project) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        onClick={onClose}
       >
-        View Project
-      </motion.a>
-    </motion.div>
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-2xl border border-base-300 bg-base-200 shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="max-h-[90vh] overflow-y-auto">
+            <div className="relative aspect-video shrink-0 overflow-hidden bg-base-300">
+              <img
+                src={project.image}
+                alt={project.heading}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="p-6">
+              <h2 className="mb-1 text-2xl font-bold">{project.heading}</h2>
+              <p className="mb-4 font-mono text-sm text-base-content/70">
+                {project.stack}
+              </p>
+              <ul className="mb-6 space-y-2 text-sm text-base-content/90">
+                {project.desc.map((item, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href={project.view}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  View Live
+                </a>
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                  >
+                    View Code
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="btn btn-circle btn-ghost btn-sm absolute right-3 top-3"
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
 const Projects = () => {
-  const lists = [
-    {
-      heading: "Servizzone",
-      stack: "Next js,Reactjs, Tailwind CSS, Nodejs, MongoDB",
-      image: servi,
-      view: "https://www.servizzone.com/",
-      desc: [
-        "Built a full-stack social media platform using the MERN stack with Next.js for the frontend and Node.js/Express for backend APIs, enabling users to perform complete CRUD operations.",
-        "Implemented TanStack Query for efficient server-state management, background data synchronization, caching, and real-time UI updates.",
-        "Developed responsive and modern UI components using React.js and Tailwind CSS, ensuring seamless performance across all screen sizes.",
-        "Integrated secure user authentication with JWT-based login, protected routes, and session handling to safeguard user data.",
-        "Designed and optimized MongoDB database schemas for scalable data storage and faster query performance.",
-      ],
-    },
-    {
-      heading: "Ownway Tech",
-      stack:
-        "Reactjs, Tailwind, Nodejs, MongoDB",
-      image: ownway,
-      view: "https://ownwaytech.com/",
-      desc: [
-        "Developed a MERN complete full stack social media website, user can do crud operation with the help of tanstack",
-        "Dynamic and responsive user interfaces using React.js, Material UI and Bootstrap ensuring compatibility across various devices and screen sizes.",
-        "Managed application state using React’s built-in state management and hooks for efficient data handling and component updates.",
-        "Enabled user login with authentication checks and session management.",
-      ],
-    },
-    {
-      heading: "Notes App",
-      stack: "Reactjs, Bootstrap, Nodejs, Expressjs, MySql, MongoDB, JWT",
-      image: notes,
-      view: "https://notes-mern-hlxh.onrender.com/",
-      desc: [
-        "Facilitated user registration with input validation and secure data handling.",
-        "Enabled user login with authentication checks and session management.",
-        "Enabled users to create, read, update, and delete notes with a responsive and intuitive interface.",
-        "Designed and implemented a MySQL database schema for efficient storage and retrieval of user notes.",
-        "Implemented secure user registration and login functionality using JWT for authentication and session management.",
-        "Developed RESTful APIs to handle data operations between the frontend and backend efficiently.",
-      ],
-    },
-    {
-      heading: "Netflix-Clone",
-      stack: "Reactjs,Bootstrap,Css",
-      image: netflix,
-      view: "https://netflix-clone-eight-nu-57.vercel.app/",
-      desc: [
-        "Built the entire user interface using React.js, focusing on dynamic rendering",
-        "Designed a responsive UI using CSS and media queries, ensuring a seamless experience across mobile, tablet, and desktop devices.",
-        "Focused on optimizing user experience with smooth transitions, animations, and loading optimizations.",
-        "Later i will update on the backend process",
-      ],
-    },
-    {
-      heading: "Chat_app",
-      stack: "Reactjs, Bootstrap, Nodejs, Expressjs, MongoDB,Socket.io, JWT",
-      image: chat,
-      view: "https://chat-app-1vjm.onrender.com/",
-      desc: [
-        "Implemented secure user registration and login functionality using JWT for authentication and session management.",
-        "Enabled users to create chat with participants and intuitive interface.",
-        "Designed and implemented a MySQL database schema for efficient storage and retrieval of user notes.",
-        "Using a socket.io for real time chat application.",
-        "Developed RESTful APIs to handle data operations between the frontend and backend efficiently.",
-      ],
-    },
-    {
-      heading: "E-commerce",
-      stack: "Reactjs, Bootstrap, Nodejs, Expressjs, MongoDB, JWT,",
-      image: ecom,
-      view: "https://e-commerce-fgki.onrender.com/",
-      desc: [
-        "Designed and implemented dynamic and responsive user interfaces using React.js and Bootstrap, ensuring compatibility across various devices and screen sizes.",
-        "Managed application state using React’s built-in state management and hooks for efficient data handling and component updates.",
-        "Enabled user login with authentication checks and session management.",
-      ],
-    },
-  ];
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [detailProject, setDetailProject] = useState(null);
+
+  const filteredProjects = activeCategory === "all"
+    ? projectsData
+    : projectsData.filter((p) => p.category === activeCategory);
+
+  const openDetail = useCallback((project) => setDetailProject(project), []);
+  const closeDetail = useCallback(() => setDetailProject(null), []);
 
   return (
-    <section className="lg:w-[80%] lg:mx-auto py-28 lg:pt-40">
+    <section className="mx-auto w-full max-w-6xl px-4 py-20  lg:py-34">
       <motion.h1
-        className="text-3xl md:text-4xl text-center font-bold mb-10"
-        initial={{ opacity: 0, y: 100 }}
+        className="mb-10 text-center text-3xl font-bold tracking-tight md:text-4xl"
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.4 }}
       >
         Projects
       </motion.h1>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 m-3">
-        {lists.map((project, index) => (
-          <ProjectCard key={index} project={project} />
+      <motion.div
+        className="mb-10 flex flex-wrap justify-center gap-2"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.1 }}
+      >
+        {projectCategories.map((cat) => (
+          <button
+            key={cat.id}
+            type="button"
+            onClick={() => setActiveCategory(cat.id)}
+            className={`btn btn-sm ${
+              activeCategory === cat.id ? "btn-primary" : "btn-ghost"
+            }`}
+          >
+            {cat.label}
+          </button>
         ))}
+      </motion.div>
+
+      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <AnimatePresence mode="wait">
+          {filteredProjects.length > 0 ? (
+            filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                onOpenDetail={openDetail}
+              />
+            ))
+          ) : (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="col-span-full py-12 text-center text-base-content/70"
+            >
+              No projects in this category yet.
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
+
+      <AnimatePresence>
+        {detailProject ? (
+          <ProjectDetailModal
+            key={detailProject.id}
+            project={detailProject}
+            onClose={closeDetail}
+          />
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 };

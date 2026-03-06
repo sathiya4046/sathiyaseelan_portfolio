@@ -8,7 +8,7 @@ const Footer = () => {
         <div>
           Copyrights &copy; {new Date().getFullYear()} &rarr;
         </div>
-        <Link className="bg-clip-text text-transparent" to={'/sathiyaseelan_portfolio'}>
+        <Link className="bg-clip-text text-transparent" to="/">
             <NameBoard 
               name={"Sathiyaseelan"}
               className="text-xl font-extrabold tracking-wider font-SansOne"

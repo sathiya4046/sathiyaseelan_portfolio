@@ -98,7 +98,7 @@ function App() {
       
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/sathiyaseelan_portfolio" element={
+          <Route path="/" element={
             <motion.div
               variants={pageVariants}
               initial={isFirstMount ? "initial" : "initial"}

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { imageUrl } from "@/lib/imageUrl";
 
 import html from './images/html-5.svg'
 import css from './images/css-3.svg'
@@ -78,7 +79,7 @@ const Skills = () => {
                 data-tip={skill.tip}
               >
                 <img
-                  src={skill.svg}
+                  src={imageUrl(skill.svg)}
                   alt={skill.tip}
                   className="w-16 h-16 lg:w-20 lg:h-20 object-contain"
                 />

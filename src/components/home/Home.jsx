@@ -1,4 +1,7 @@
+"use client";
+
 import sathiya from '../../assets/sath.jpg'
+import { imageUrl } from "@/lib/imageUrl";
 import { motion } from 'framer-motion';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import NameBoard from '../navbar/menu/NameBoard';
@@ -74,7 +77,7 @@ const Home = () => {
             transition={{ type: 'spring', stiffness: 100 }}
           >
             <motion.img
-              src={sathiya}
+              src={imageUrl(sathiya)}
               className="max-w-sm md:max-w-lg rounded-full w-60 h-60 md:w-72 md:h-72 lg:w-80 lg:h-80 shadow-2xl"
               whileHover={{ scale: 1.05, rotate: 2 }}
               whileTap={{ scale: 0.95 }}

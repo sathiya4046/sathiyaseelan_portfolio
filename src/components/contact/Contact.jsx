@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import Social from '../navbar/menu/Social';
@@ -50,7 +52,12 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    emailjs.sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, e.target, import.meta.env.VITE_PUBLIC_KEY)
+    emailjs.sendForm(
+      process.env.NEXT_PUBLIC_SERVICE_ID,
+      process.env.NEXT_PUBLIC_TEMPLATE_ID,
+      e.target,
+      process.env.NEXT_PUBLIC_PUBLIC_KEY
+    )
       .then(() => {
         toast.success("Message sent...", {
           icon: '✉️',

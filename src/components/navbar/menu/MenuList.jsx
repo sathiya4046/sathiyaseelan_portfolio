@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const menuItemVariants = {
   closed: { opacity: 0, x: -50 },
@@ -35,7 +35,7 @@ const MenuList = ({ toggleSidebar, theme }) => {
           >
             <Link 
               onClick={toggleSidebar} 
-              to={item.path} 
+              href={item.path} 
               className="relative group"
             >
               {item.text}

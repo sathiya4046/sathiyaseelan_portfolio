@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
-import { Link } from 'react-router-dom';
 
 const Social = () => {
   const socialLinks = [
@@ -54,14 +53,15 @@ const Social = () => {
           whileTap={{ scale: 0.9 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
-          <Link
-            target='blank'
-            to={link.url}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={link.url}
             className="tooltip tooltip-bottom ms-2 p-3 shadow shadow-cyan-400 rounded-full hover:-translate-y-1.5 transform transition duration-500 hover:shadow-xl"
             data-tip={link.tip}
           >
             {link.icon}
-          </Link>
+          </a>
         </motion.div>
       ))}
     </motion.div>

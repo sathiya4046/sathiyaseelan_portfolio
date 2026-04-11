@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import NameBoard from '../navbar/menu/NameBoard'
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
         <div>
           Copyrights &copy; {new Date().getFullYear()} &rarr;
         </div>
-        <Link className="bg-clip-text text-transparent" to="/">
+        <Link className="bg-clip-text text-transparent" href="/">
             <NameBoard 
               name={"Sathiyaseelan"}
               className="text-xl font-extrabold tracking-wider font-SansOne"

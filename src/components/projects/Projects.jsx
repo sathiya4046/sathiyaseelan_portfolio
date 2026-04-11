@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { projectsData, projectCategories } from "../../data/projectsData";
+import { imageUrl } from "@/lib/imageUrl";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40 },
@@ -35,7 +38,7 @@ const ProjectCard = ({ project, index, onOpenDetail }) => {
     >
       <div className="relative aspect-video overflow-hidden bg-base-300">
         <motion.img
-          src={project.image}
+          src={imageUrl(project.image)}
           alt={project.heading}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
@@ -122,7 +125,7 @@ const ProjectDetailModal = ({ project, onClose }) => {
           <div className="max-h-[90vh] overflow-y-auto">
             <div className="relative aspect-video shrink-0 overflow-hidden bg-base-300">
               <img
-                src={project.image}
+                src={imageUrl(project.image)}
                 alt={project.heading}
                 className="h-full w-full object-cover"
               />
@@ -188,16 +191,7 @@ const Projects = () => {
   const closeDetail = useCallback(() => setDetailProject(null), []);
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 py-20  lg:py-34">
-      <motion.h1
-        className="mb-10 text-center text-3xl font-bold tracking-tight md:text-4xl"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.4 }}
-      >
-        Projects
-      </motion.h1>
+    <section className="mx-auto w-full max-w-8xl px-4 py-20  lg:py-34">
 
       <motion.div
         className="mb-10 flex flex-wrap justify-center gap-2"

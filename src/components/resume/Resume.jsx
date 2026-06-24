@@ -1,131 +1,94 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer"
+import { useInView } from "react-intersection-observer";
 import pdf from "./FSD.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import Section from "../ui/Section";
+import SectionHeader from "../ui/SectionHeader";
+import { glassCard, premiumBtnPrimary } from "../ui/styles";
+import { fadeUpItem, fadeUpStagger } from "../ui/motion";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 function Resume() {
   const [width, setWidth] = useState(1200);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-
+    const handleResize = () => setWidth(window.innerWidth);
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const downloadVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const pageVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
-      scale: 1,
-      transition: { 
-        type: "spring",
-        stiffness: 100,
-        damping: 10
-      }
-    }
-  };
+  const DownloadBtn = ({ delay = 0 }) => (
+    <motion.a
+      href={pdf}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${premiumBtnPrimary} gap-2`}
+      whileHover={{ scale: 1.03, y: -2 }}
+      whileTap={{ scale: 0.97 }}
+      variants={fadeUpItem}
+      custom={delay}
+    >
+      <AiOutlineDownload className="text-lg" />
+      <span>Download CV</span>
+    </motion.a>
+  );
 
   return (
-    <motion.div 
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col items-center py-28 lg:pt-40"
-    >
-      <motion.div 
-        className="mb-4"
-        variants={downloadVariants}
+    <Section id="resume" ariaLabelledby="resume-heading">
+      <motion.div
+        ref={ref}
+        className="mx-auto flex w-full max-w-4xl flex-col items-center"
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
+        variants={fadeUpStagger}
       >
-        <motion.a
-          href={pdf}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-soft flex items-center max-w-xs hover:underline"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <AiOutlineDownload />
-          <span className="ml-2">Download CV</span>
-        </motion.a>
-      </motion.div>
+        <SectionHeader
+          eyebrow="Curriculum Vitae"
+          title="My"
+          titleAccent="Resume"
+          subtitle="Download or preview my full-stack development credentials and professional background."
+        />
+        <h2 id="resume-heading" className="sr-only">
+          Resume
+        </h2>
 
-      <div className="mb-4">
-        <Document file={pdf} className="flex justify-center">
-          <motion.div
-            variants={pageVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-          >
-            <Page 
-              pageNumber={1} 
-              scale={width > 900 ? 1.3 : 0.6} 
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          </motion.div>
-        </Document>
-        
-        {/* <Document file={pdf} className="flex justify-center mt-4">
-          <motion.div
-            variants={pageVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            transition={{ delay: 0.2 }}
-          >
-            <Page 
-              pageNumber={2} 
-              scale={width > 900 ? 1.3 : 0.6} 
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
-            />
-          </motion.div>
-        </Document> */}
-      </div>
+        <motion.div className="mb-6" variants={fadeUpItem}>
+          <DownloadBtn />
+        </motion.div>
 
-      <motion.div 
-        className="mt-4"
-        variants={downloadVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        transition={{ delay: 0.4 }}
-      >
-        <motion.a
-          href={pdf}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-soft flex items-center max-w-xs hover:underline"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <motion.div
+          className={`w-full overflow-hidden ${glassCard} p-4 sm:p-6`}
+          variants={fadeUpItem}
         >
-          <AiOutlineDownload />
-          <span className="ml-2">Download CV</span>
-        </motion.a>
+          <Document file={pdf} className="flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ type: "spring", stiffness: 100, damping: 14 }}
+            >
+              <Page
+                pageNumber={1}
+                scale={width > 900 ? 1.2 : width > 600 ? 0.8 : 0.55}
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+              />
+            </motion.div>
+          </Document>
+        </motion.div>
+
+        <motion.div className="mt-6" variants={fadeUpItem}>
+          <DownloadBtn />
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </Section>
   );
 }
 

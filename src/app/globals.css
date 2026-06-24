@@ -9,12 +9,20 @@
     --font-protest:"Protest Revolution", sans-serif;
     --font-poppins:"Poppins", sans-serif;
     --font-josefin:"Josefin Sans", sans-serif;
+    --container-max: 90rem;
 }
 
 /* Hide scrollbar for all */
 html {
   scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  -ms-overflow-style: none;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 html::-webkit-scrollbar {
@@ -35,4 +43,35 @@ html::-webkit-scrollbar {
 }
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
+}
+
+@keyframes marquee-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-ltr {
+  animation: marquee-ltr var(--marquee-duration, 38s) linear infinite;
+}
+
+.marquee-rtl {
+  animation: marquee-rtl var(--marquee-duration, 42s) linear infinite;
+}
+
+.marquee-row:hover .marquee-ltr,
+.marquee-row:hover .marquee-rtl {
+  animation-play-state: paused;
 }

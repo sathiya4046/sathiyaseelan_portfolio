@@ -12,19 +12,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const pageVariants = {
-  initial: { opacity: 0, y: 50 },
+  initial: { opacity: 0, y: 30 },
   animate: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      staggerChildren: 0.1,
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
-    transition: { duration: 0.3 },
+    y: -20,
+    transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -93,24 +93,26 @@ export default function AppShell({ children }) {
     <main
       ref={appRef}
       data-theme={theme}
-      className="font-comfortaa overflow-x-hidden w-[90%] mx-auto"
+      className="font-comfortaa overflow-x-hidden w-full"
     >
       <Header toggleTheme={toggleTheme} theme={theme} />
 
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={pathname}
-          variants={pageVariants}
-          initial={isFirstMount ? "initial" : "initial"}
-          animate="animate"
-          exit="exit"
-          onAnimationComplete={() => setIsFirstMount(false)}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      <div className="px-6 sm:px-0 ">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={pathname}
+            variants={pageVariants}
+            initial={isFirstMount ? "initial" : "initial"}
+            animate="animate"
+            exit="exit"
+            onAnimationComplete={() => setIsFirstMount(false)}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
 
-      <Footer />
+        <Footer />
+      </div>
       <Toaster />
     </main>
   );

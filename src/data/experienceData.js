@@ -18,7 +18,7 @@ export const experienceData = [
   {
     company: 'Jaya info-soft Pvt ltd, Chennai',
     role: 'Web Developer',
-    duration: 'Sep 2023 - June 2025',
+    duration: 'Feb 2024 - June 2025',
     points: [
         'Implemented RESTful APIs for seamless data communication and real-time updates using Axios to handle HTTP requests and responses.',
         'Maintaining and updating websites by adding new features, improving performance, and fixing bugs.',
@@ -29,21 +29,6 @@ export const experienceData = [
     ],
     direction: 'left'
   },
-  // {
-  //   company: 'City centre, Cambodia',
-  //   role: 'Customer Support',
-  //   duration: 'Apr 2022 – Jul 2023',
-  //   points: [
-  //     'Handle inbound customer inquiries via phone, email, chat, or social media.',
-  //     'Together with my manager and team head, we listen to their ideas and complete the work very quickly',
-  //     'Coordinate with my team and implement new ideas for the project',
-  //     'Effectively communicate with customers to understand their needs and resolve their issues.',
-  //     'Follow up with customers to ensure their issues are resolved and they are satisfied with the outcome.',
-  //     'Stay up-to-date with product knowledge and customer support best practices.',
-  //     'Ensure high levels of customer satisfaction through excellent service.'
-  //   ],
-  //   direction: 'left'
-  // },
   {
     company: 'Pesko Engineering pte Ltd, Singapore',
     role: 'Electrical Fitter',

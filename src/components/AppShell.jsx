@@ -9,24 +9,9 @@ import { Toaster } from "react-hot-toast";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+import { PAGE_TRANSITION } from "./ui/motion";
 
-const pageVariants = {
-  initial: { opacity: 0, y: 30 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -20,
-    transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AppShell({ children }) {
   const appRef = useRef();
@@ -93,7 +78,7 @@ export default function AppShell({ children }) {
     <main
       ref={appRef}
       data-theme={theme}
-      className="font-comfortaa overflow-x-hidden w-full"
+      className="font-comfortaa min-h-svh overflow-x-hidden w-full bg-base-100 text-base-content transition-colors duration-500"
     >
       <Header toggleTheme={toggleTheme} theme={theme} />
 
@@ -101,7 +86,7 @@ export default function AppShell({ children }) {
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={pathname}
-            variants={pageVariants}
+            variants={PAGE_TRANSITION}
             initial={isFirstMount ? "initial" : "initial"}
             animate="animate"
             exit="exit"
@@ -113,7 +98,18 @@ export default function AppShell({ children }) {
 
         <Footer />
       </div>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            background: theme === "dark" ? "#1e293b" : "#f8fafc",
+            color: theme === "dark" ? "#f1f5f9" : "#0f172a",
+            border:
+              theme === "dark"
+                ? "1px solid rgba(255,255,255,0.08)"
+                : "1px solid rgba(0,0,0,0.08)",
+          },
+        }}
+      />
     </main>
   );
 }

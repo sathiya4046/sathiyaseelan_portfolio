@@ -63,7 +63,7 @@ const ProjectCard = ({ project, index, onOpenDetail }) => {
       </div>
 
       <div className="relative flex flex-1 flex-col p-5 sm:p-6">
-        <h2 className="text-lg font-bold tracking-tight sm:text-xl">
+        <h2 className="text-lg font-bold tracking-tight text-base-content sm:text-xl">
           {project.heading}
         </h2>
 

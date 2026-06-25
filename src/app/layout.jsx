@@ -69,7 +69,7 @@ const personJsonLd = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="bg-base-100 text-base-content antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

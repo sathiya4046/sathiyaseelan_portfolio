@@ -48,9 +48,7 @@ const rowTwo = skills.slice(9);
 
 const SkillItem = ({ skill, index }) => (
   <motion.div
-    className={`tooltip tooltip-info group/skill flex shrink-0 flex-col items-center gap-2 px-4 sm:px-6 ${
-      index % 2 === 0 ? "tooltip-bottom" : "tooltip-top"
-    }`}
+    className={`group/skill flex shrink-0 flex-col items-center gap-2 px-4 sm:px-6 `}
     data-tip={skill.tip}
     whileHover={{ scale: 1.18, y: -8 }}
     transition={{ type: "spring", stiffness: 300, damping: 18 }}
@@ -60,7 +58,7 @@ const SkillItem = ({ skill, index }) => (
       alt={skill.tip}
       className="h-11 w-11 object-contain drop-shadow-md transition-all duration-300 group-hover/skill:drop-shadow-[0_8px_24px_rgba(34,211,238,0.35)] sm:h-14 sm:w-14 lg:h-16 lg:w-16"
     />
-    <span className="text-[10px] font-medium uppercase tracking-widest text-base-content/40 transition-colors duration-300 group-hover/skill:text-cyan-300/70 sm:text-xs">
+    <span className="text-[10px] font-medium uppercase tracking-widest text-base-content/50 transition-colors duration-300 group-hover/skill:text-cyan-600 dark:group-hover/skill:text-cyan-300/80 sm:text-xs">
       {skill.tip}
     </span>
   </motion.div>

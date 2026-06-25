@@ -50,7 +50,7 @@ const Education = () => {
                 {headers.map((header) => (
                   <th
                     key={header}
-                    className="p-3 font-SansOne text-sm font-semibold uppercase tracking-wider text-cyan-400/80 sm:p-4 sm:text-base"
+                    className="p-3 font-SansOne text-sm font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400/90 sm:p-4 sm:text-base"
                   >
                     {header}
                   </th>

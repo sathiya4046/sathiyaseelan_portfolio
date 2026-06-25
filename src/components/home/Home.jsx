@@ -8,7 +8,7 @@ import NameBoard from "../navbar/menu/NameBoard";
 import Skills from "./skills/Skills";
 import Experiences from "../experience/Experiences";
 import BackgroundAtmosphere from "../ui/BackgroundAtmosphere";
-import { EASE_PREMIUM } from "../ui/motion";
+import { EASE_PREMIUM, SPRING_SOFT } from "../ui/motion";
 import { glassCard, gradientText } from "../ui/styles";
 
 const Home = () => {
@@ -45,7 +45,7 @@ const Home = () => {
               transition={{ delay: 0.15 }}
             >
               <span className="h-px w-10 bg-gradient-to-r from-transparent to-cyan-400/60" />
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-400/80 sm:text-sm">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-600 dark:text-cyan-400/90 sm:text-sm">
                 Hello, this is
               </span>
             </motion.div>
@@ -63,7 +63,7 @@ const Home = () => {
             </motion.div>
 
             <motion.h1
-              className="min-h-[3.5rem] w-full text-2xl font-protest tracking-widest sm:min-h-16 sm:text-3xl md:text-4xl lg:text-5xl"
+              className="min-h-[3.5rem] w-full text-2xl font-protest tracking-widest text-base-content sm:min-h-16 sm:text-3xl md:text-4xl lg:text-5xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}
@@ -90,17 +90,19 @@ const Home = () => {
             >
               <motion.a
                 href="/services"
-                className="inline-flex items-center rounded-xl border border-cyan-400/30 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10"
+                className="inline-flex items-center rounded-xl border border-cyan-400/30 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 px-6 py-3 text-sm font-semibold text-base-content backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
+                transition={SPRING_SOFT}
               >
                 View Projects
               </motion.a>
               <motion.a
                 href="/contact"
-                className="inline-flex items-center rounded-xl border border-base-content/15 bg-base-200/30 px-6 py-3 text-sm font-medium text-base-content/80 backdrop-blur-sm transition-all hover:border-base-content/25 hover:bg-base-200/50"
+                className="inline-flex items-center rounded-xl border border-base-content/15 bg-base-200/30 px-6 py-3 text-sm font-medium text-base-content/80 backdrop-blur-sm transition-all duration-300 hover:border-base-content/25 hover:bg-base-200/50 hover:text-base-content"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
+                transition={SPRING_SOFT}
               >
                 Get in Touch
               </motion.a>
@@ -115,7 +117,7 @@ const Home = () => {
           >
             <div className="absolute inset-0 m-auto h-56 w-56 rounded-full bg-gradient-to-br from-cyan-500/20 to-purple-500/20 blur-3xl sm:h-72 sm:w-72 lg:h-96 lg:w-96" />
             <motion.div
-              className={`relative ${glassCard} p-2 sm:p-3`}
+              className={`relative rounded-full ${glassCard} p-2 sm:p-3`}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 260, damping: 22 }}
             >
@@ -123,11 +125,11 @@ const Home = () => {
                 src={imageUrl(sathiya)}
                 alt="Sathiyaseelan"
                 className="h-52 w-52 rounded-full object-cover sm:h-64 sm:w-64 md:h-72 md:w-72 lg:h-80 lg:w-80"
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ rotate: 6 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={SPRING_SOFT}
               />
-              <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-cyan-400/20 via-transparent to-purple-400/20 opacity-60" />
+              
             </motion.div>
           </motion.div>
         </div>

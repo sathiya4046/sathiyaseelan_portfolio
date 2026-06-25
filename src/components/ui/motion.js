@@ -1,8 +1,35 @@
 export const EASE_PREMIUM = [0.22, 1, 0.36, 1];
+export const EASE_SMOOTH = [0.4, 0, 0.2, 1];
 
 export const SPRING_SOFT = { type: "spring", stiffness: 260, damping: 22 };
 export const SPRING_SNAPPY = { type: "spring", stiffness: 300, damping: 22 };
 export const SPRING_GENTLE = { type: "spring", stiffness: 100, damping: 20 };
+
+export const PAGE_TRANSITION = {
+  initial: { opacity: 0, y: 24 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: EASE_PREMIUM },
+  },
+  exit: {
+    opacity: 0,
+    y: -16,
+    transition: { duration: 0.35, ease: EASE_PREMIUM },
+  },
+};
+
+export const VIEWPORT_FADE = {
+  once: true,
+  margin: "-60px",
+};
+
+export const fadeInView = {
+  initial: { opacity: 0, y: 16 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: VIEWPORT_FADE,
+  transition: { duration: 0.55, ease: EASE_PREMIUM },
+};
 
 export const SECTION_PY = "py-20 sm:py-24 lg:py-32";
 

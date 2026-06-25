@@ -36,13 +36,11 @@ const MenuList = ({ toggleSidebar, theme }) => {
             <Link 
               onClick={toggleSidebar} 
               href={item.path} 
-              className="relative group"
+              className="relative group text-base-content"
             >
               {item.text}
               <span
-                className={`absolute group-hover:rounded-2xl left-1/2 -bottom-2 w-0 h-0.5 ${
-                  theme === 'dark' ? 'bg-white' : 'bg-black'
-                } transform transition-all duration-500 group-hover:w-full group-hover:left-0 group-hover:right-auto group-hover:h-1 group-hover:translate-x-0`}
+                className="absolute left-1/2 -bottom-2 h-0.5 w-0 bg-base-content transform transition-all duration-500 group-hover:left-0 group-hover:right-auto group-hover:h-1 group-hover:w-full group-hover:translate-x-0 group-hover:rounded-2xl"
               ></span>
             </Link>
           </motion.li>

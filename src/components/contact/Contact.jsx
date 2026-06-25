@@ -6,6 +6,8 @@ import Social from '../navbar/menu/Social';
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser'
+import { EASE_PREMIUM, SPRING_GENTLE } from '../ui/motion'
+import { gradientText } from '../ui/styles'
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -35,16 +37,16 @@ const Contact = () => {
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { type: 'spring', stiffness: 100 }
+      transition: { duration: 0.55, ease: EASE_PREMIUM }
     }
   }
 
   const slideInVariants = (direction) => ({
-    hidden: { opacity: 0, x: direction === 'left' ? -100 : 100 },
+    hidden: { opacity: 0, x: direction === 'left' ? -48 : 48 },
     visible: { 
       opacity: 1, 
       x: 0,
-      transition: { type: 'spring', stiffness: 80 }
+      transition: SPRING_GENTLE
     }
   })
 
@@ -59,13 +61,7 @@ const Contact = () => {
       process.env.NEXT_PUBLIC_PUBLIC_KEY
     )
       .then(() => {
-        toast.success("Message sent...", {
-          icon: '✉️',
-          style: {
-            background: '#333',
-            color: '#fff',
-          }
-        })
+        toast.success("Message sent...", { icon: '✉️' })
         setValues({
           name: "",
           email: "",
@@ -73,13 +69,7 @@ const Contact = () => {
         })
       })
       .catch((error) => {
-        toast.error(`Error: ${error}`, {
-          icon: '❌',
-          style: {
-            background: '#ff4444',
-            color: '#fff',
-          }
-        })
+        toast.error(`Error: ${error}`, { icon: '❌' })
       })
   }
 
@@ -97,18 +87,19 @@ const Contact = () => {
           variants={slideInVariants('left')}
         >
           <motion.h1 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
+            className="mb-6 text-3xl font-bold text-base-content sm:text-4xl lg:text-5xl"
             variants={itemVariants}
           >
             Feel free to contact !
           </motion.h1>
           <motion.p 
-            className="py-6 text-lg"
+            className="py-6 text-lg text-base-content/75"
             variants={itemVariants}
           >
-            Let's build something <motion.mark 
-              className='bg-gray-200 px-3 rounded-2xl font-bold'
-              whileHover={{ scale: 1.1 }}
+            Let&apos;s build something <motion.mark 
+              className={`rounded-2xl bg-base-200 px-3 font-bold ${gradientText}`}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3, ease: EASE_PREMIUM }}
             >
               amazing
             </motion.mark> together
@@ -131,7 +122,7 @@ const Contact = () => {
               >
                 {field === 'message' ? (
                   <textarea
-                    className='mt-3 p-4 w-full border rounded border-gray-400 transition-all'
+                    className="mt-3 w-full rounded-lg border border-base-content/20 bg-base-100 p-4 text-base-content transition-all duration-300 placeholder:text-base-content/40 focus:border-cyan-400/40 focus:outline-none focus:ring-2 focus:ring-cyan-400/20"
                     placeholder='Message'
                     name={field}
                     rows={4}
@@ -141,7 +132,7 @@ const Contact = () => {
                   />
                 ) : (
                   <input
-                    className='mt-3 p-4 w-full  border rounded border-gray-400 transition-all'
+                    className="mt-3 w-full rounded-lg border border-base-content/20 bg-base-100 p-4 text-base-content transition-all duration-300 placeholder:text-base-content/40 focus:border-cyan-400/40 focus:outline-none focus:ring-2 focus:ring-cyan-400/20"
                     type={field === 'email' ? 'email' : 'text'}
                     placeholder={field === 'name' ? 'Full Name' : 'Email'}
                     name={field}
@@ -155,9 +146,10 @@ const Contact = () => {
 
             <motion.button
               type="submit"
-              className="btn btn-neutral mt-3 p-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="btn btn-neutral mt-3 p-2 text-base-100 transition-transform duration-300"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.3, ease: EASE_PREMIUM }}
               variants={itemVariants}
             >
               Submit

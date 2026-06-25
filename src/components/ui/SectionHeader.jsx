@@ -33,14 +33,14 @@ export default function SectionHeader({
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <span className="h-px w-12 bg-gradient-to-r from-transparent to-cyan-400/60 sm:w-16" />
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400/80 sm:text-sm">
+          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-400/90 sm:text-sm">
             {eyebrow}
           </span>
           <span className="h-px w-12 bg-gradient-to-l from-transparent to-purple-400/60 sm:w-16" />
         </motion.div>
       )}
 
-      <h2 className="font-SansOne text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+      <h2 className="font-SansOne text-3xl font-bold tracking-tight text-base-content sm:text-4xl lg:text-5xl">
         {title}{" "}
         {titleAccent && <span className={gradientText}>{titleAccent}</span>}
       </h2>

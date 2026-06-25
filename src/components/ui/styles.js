@@ -1,5 +1,5 @@
 export const glassCard =
-  "rounded-full border border-base-content/10 bg-base-200/30 shadow-md shadow-base-content/5 backdrop-blur-xl";
+  "border border-base-content/10 bg-base-200/30 shadow-md shadow-base-content/5 backdrop-blur-xl";
 
 export const glassCardHover =
   "group relative overflow-hidden transition-all duration-500 hover:border-cyan-400/20 hover:shadow-lg hover:shadow-cyan-500/10";

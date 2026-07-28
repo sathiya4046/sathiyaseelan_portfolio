@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 import { imageUrl } from "@/lib/imageUrl";
 import Section from "../../ui/Section";
 import SectionHeader from "../../ui/SectionHeader";
+import { EASE_PREMIUM } from "../../ui/motion";
+
+const AWS_BADGE_ID = "e24e624c-9f57-446f-a306-ceab76944583";
+const AWS_BADGE_SRC = "/aws-certified-solutions-architect-associate.png";
+const AWS_CREDLY_URL = `https://www.credly.com/badges/${AWS_BADGE_ID}/public_url`;
 
 import html from "./images/html-5.svg";
 import css from "./images/css-3.svg";
@@ -92,6 +97,186 @@ const MarqueeRow = ({ items, direction, duration }) => {
   );
 };
 
+const AwsCredlyBadge = () => {
+  return (
+    <motion.div
+      className="relative mx-auto mt-14 w-full max-w-5xl overflow-hidden px-4 sm:mt-16 sm:px-6"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.12, delayChildren: 0.08 } },
+      }}
+    >
+      {/* ambient wash */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <motion.div
+          className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FF9900]/10 blur-3xl sm:h-96 sm:w-96"
+          animate={{ scale: [1, 1.15, 1], opacity: [0.35, 0.55, 0.35] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute left-[20%] top-[30%] h-48 w-48 rounded-full bg-[#232F3E]/20 blur-3xl dark:bg-cyan-500/10"
+          animate={{ x: [0, 24, 0], y: [0, -16, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="relative grid items-center gap-10 rounded-[2rem] border border-base-content/10 bg-base-200/25 p-6 backdrop-blur-xl sm:gap-12 sm:p-10 lg:grid-cols-[1.15fr_0.85fr] lg:p-12">
+        {/* animated border shimmer */}
+        <motion.div
+          className="pointer-events-none absolute inset-0 rounded-[2rem] opacity-60"
+          style={{
+            background:
+              "linear-gradient(120deg, transparent 30%, rgba(255,153,0,0.12) 50%, transparent 70%)",
+            backgroundSize: "200% 100%",
+          }}
+          animate={{ backgroundPosition: ["0% 0%", "200% 0%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* copy */}
+        <div className="relative z-10 space-y-5 text-center lg:text-left">
+          <motion.div
+            className="inline-flex items-center gap-2 rounded-full border border-[#FF9900]/25 bg-[#FF9900]/10 px-3 py-1.5"
+            variants={{
+              hidden: { opacity: 0, y: 16 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_PREMIUM } },
+            }}
+          >
+            <motion.span
+              className="h-1.5 w-1.5 rounded-full bg-[#FF9900]"
+              animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C77700] dark:text-[#FFB84D] sm:text-xs">
+              Verified Credential
+            </span>
+          </motion.div>
+
+          <motion.h3
+            className="font-SansOne text-2xl font-bold tracking-tight text-base-content sm:text-3xl lg:text-4xl"
+            variants={{
+              hidden: { opacity: 0, y: 22 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE_PREMIUM } },
+            }}
+          >
+            AWS Certified{" "}
+            <span className="bg-gradient-to-r from-[#FF9900] via-amber-400 to-orange-500 bg-clip-text text-transparent">
+              Solutions Architect
+            </span>
+          </motion.h3>
+
+          <motion.p
+            className="mx-auto max-w-md text-sm leading-relaxed text-base-content/65 sm:text-base lg:mx-0"
+            variants={{
+              hidden: { opacity: 0, y: 18 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE_PREMIUM } },
+            }}
+          >
+            Associate-level certification validating cloud architecture design,
+            high-availability systems, and AWS best practices — verified on Credly.
+          </motion.p>
+
+          <motion.div
+            className="flex flex-wrap items-center justify-center gap-2 lg:justify-start"
+            variants={{
+              hidden: { opacity: 0, y: 14 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_PREMIUM } },
+            }}
+          >
+            {["Cloud Architecture", "High Availability", "AWS Best Practices"].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-lg border border-base-content/10 bg-base-100/40 px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-base-content/55 sm:text-xs"
+              >
+                {tag}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.a
+            href={AWS_CREDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl border border-[#FF9900]/35 bg-gradient-to-r from-[#FF9900]/15 to-orange-500/10 px-5 py-2.5 text-sm font-semibold text-base-content transition-all duration-300 hover:border-[#FF9900]/55 hover:shadow-lg hover:shadow-[#FF9900]/15"
+            variants={{
+              hidden: { opacity: 0, y: 14 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_PREMIUM } },
+            }}
+            whileHover={{ scale: 1.03, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            View on Credly
+            <motion.span
+              aria-hidden
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              →
+            </motion.span>
+          </motion.a>
+        </div>
+
+        {/* badge stage — local image only */}
+        <motion.div
+          className="relative z-10 mx-auto flex h-[280px] w-full max-w-[280px] items-center justify-center sm:h-[300px]"
+          variants={{
+            hidden: { opacity: 0, scale: 0.88 },
+            visible: {
+              opacity: 1,
+              scale: 1,
+              transition: { duration: 0.7, ease: EASE_PREMIUM },
+            },
+          }}
+        >
+          {/* orbital rings */}
+          <motion.div
+            className="pointer-events-none absolute h-56 w-56 rounded-full border border-[#FF9900]/20 sm:h-64 sm:w-64"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+          >
+            <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-[#FF9900]/80 shadow-[0_0_12px_rgba(255,153,0,0.7)]" />
+          </motion.div>
+          <motion.div
+            className="pointer-events-none absolute h-44 w-44 rounded-full border border-dashed border-cyan-400/25 sm:h-52 sm:w-52"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          >
+            <span className="absolute bottom-2 right-6 h-1.5 w-1.5 rounded-full bg-cyan-400/80" />
+          </motion.div>
+          <motion.div
+            className="pointer-events-none absolute h-64 w-64 rounded-full border border-base-content/5 sm:h-72 sm:w-72"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          />
+
+          {/* floating badge image */}
+          <motion.a
+            href={AWS_CREDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 block"
+            aria-label="AWS Certified Solutions Architect – Associate — view on Credly"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="absolute inset-0 -z-10 m-auto h-40 w-40 rounded-full bg-[#FF9900]/20 blur-2xl" />
+            <img
+              src={AWS_BADGE_SRC}
+              alt="AWS Certified Solutions Architect – Associate"
+              className="relative h-44 w-44 object-contain drop-shadow-[0_20px_40px_rgba(35,47,62,0.45)] sm:h-52 sm:w-52 lg:h-56 lg:w-56"
+            />
+          </motion.a>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Skills = () => {
   return (
     <Section id="skills" ariaLabelledby="skills-heading" atmosphereIntensity="subtle">
@@ -111,6 +296,8 @@ const Skills = () => {
         <MarqueeRow items={rowOne} direction="ltr" duration={36} />
         <MarqueeRow items={rowTwo} direction="rtl" duration={40} />
       </div>
+
+      <AwsCredlyBadge />
     </Section>
   );
 };

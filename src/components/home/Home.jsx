@@ -1,6 +1,6 @@
 "use client";
 
-import sathiya from "../../assets/sath.jpg";
+import sathiya from "../../assets/image.png";
 import { imageUrl } from "@/lib/imageUrl";
 import { motion } from "framer-motion";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
@@ -63,7 +63,7 @@ const Home = () => {
             </motion.div>
 
             <motion.h1
-              className="min-h-[3.5rem] w-full text-2xl font-protest tracking-widest text-base-content sm:min-h-16 sm:text-3xl md:text-4xl lg:text-5xl"
+              className="min-h-[3.5rem] w-full text-xl font-protest tracking-widest text-base-content sm:min-h-16 sm:text-2xl md:text-3xl lg:text-4xl"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.35 }}

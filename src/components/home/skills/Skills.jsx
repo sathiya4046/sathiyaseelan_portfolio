@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { imageUrl } from "@/lib/imageUrl";
 import Section from "../../ui/Section";
 import SectionHeader from "../../ui/SectionHeader";
@@ -51,22 +52,21 @@ const skills = [
 const rowOne = skills.slice(0, 9);
 const rowTwo = skills.slice(9);
 
-const SkillItem = ({ skill, index }) => (
-  <motion.div
-    className={`group/skill flex shrink-0 flex-col items-center gap-2 px-4 sm:px-6 `}
-    data-tip={skill.tip}
-    whileHover={{ scale: 1.18, y: -8 }}
-    transition={{ type: "spring", stiffness: 300, damping: 18 }}
-  >
+const SkillItem = ({ skill }) => (
+  <div className="group/skill flex shrink-0 flex-col items-center gap-2 px-4 transition-transform duration-300 hover:-translate-y-2 hover:scale-110 sm:px-6">
     <img
       src={imageUrl(skill.svg)}
       alt={skill.tip}
-      className="h-11 w-11 object-contain drop-shadow-md transition-all duration-300 group-hover/skill:drop-shadow-[0_8px_24px_rgba(34,211,238,0.35)] sm:h-14 sm:w-14 lg:h-16 lg:w-16"
+      width={64}
+      height={64}
+      loading="lazy"
+      decoding="async"
+      className="h-11 w-11 object-contain sm:h-14 sm:w-14 lg:h-16 lg:w-16"
     />
     <span className="text-[10px] font-medium uppercase tracking-widest text-base-content/50 transition-colors duration-300 group-hover/skill:text-cyan-600 dark:group-hover/skill:text-cyan-300/80 sm:text-xs">
       {skill.tip}
     </span>
-  </motion.div>
+  </div>
 );
 
 const MarqueeRow = ({ items, direction, duration }) => {
@@ -87,8 +87,8 @@ const MarqueeRow = ({ items, direction, duration }) => {
             className="flex shrink-0 items-center gap-4 sm:gap-8 lg:gap-12"
             aria-hidden={set === 1}
           >
-            {items.map((skill, index) => (
-              <SkillItem key={`${skill.tip}-${set}`} skill={skill} index={index} />
+            {items.map((skill) => (
+              <SkillItem key={`${skill.tip}-${set}`} skill={skill} />
             ))}
           </div>
         ))}
@@ -265,10 +265,14 @@ const AwsCredlyBadge = () => {
             whileTap={{ scale: 0.98 }}
           >
             <div className="absolute inset-0 -z-10 m-auto h-40 w-40 rounded-full bg-[#FF9900]/20 blur-2xl" />
-            <img
+            <Image
               src={AWS_BADGE_SRC}
               alt="AWS Certified Solutions Architect – Associate"
-              className="relative h-44 w-44 object-contain drop-shadow-[0_20px_40px_rgba(35,47,62,0.45)] sm:h-52 sm:w-52 lg:h-56 lg:w-56"
+              width={224}
+              height={224}
+              loading="lazy"
+              sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 224px"
+              className="relative h-44 w-44 object-contain drop-shadow-lg sm:h-52 sm:w-52 lg:h-56 lg:w-56"
             />
           </motion.a>
         </motion.div>
@@ -279,17 +283,15 @@ const AwsCredlyBadge = () => {
 
 const Skills = () => {
   return (
-    <Section id="skills" ariaLabelledby="skills-heading" atmosphereIntensity="subtle">
+    <Section id="skills" ariaLabelledby="skills-heading" atmosphere={false}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <SectionHeader
+          id="skills-heading"
           eyebrow="Tech Stack"
           title="Skills &"
           titleAccent="Technologies"
           subtitle="A comprehensive toolkit spanning front-end, back-end, databases, and quality assurance — built for modern web development."
         />
-        <h2 id="skills-heading" className="sr-only">
-          Skills and Technologies
-        </h2>
       </div>
 
       <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 space-y-2 sm:space-y-4">

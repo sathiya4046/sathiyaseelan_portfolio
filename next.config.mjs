@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    optimizePackageImports: ["framer-motion", "react-icons", "react-icons/hi2", "react-icons/fa"],
+  },
+  reactStrictMode: true,
 };
 
 export default nextConfig;

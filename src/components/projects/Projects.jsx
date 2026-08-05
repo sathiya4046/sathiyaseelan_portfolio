@@ -53,11 +53,12 @@ const ProjectCard = ({ project, index, onOpenDetail }) => {
       <div className={glassCardBorderGlow} />
 
       <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-base-300">
-        <motion.img
+        <img
           src={imageUrl(project.image)}
           alt={project.heading}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-base-200/90 via-base-200/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
       </div>

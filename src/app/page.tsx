@@ -1,12 +1,14 @@
+import type { Metadata } from "next";
 import Home from "@/components/home/Home";
 
 const title = "Home";
 const description =
   "Full Stack Web Developer — React, Node.js, modern web. Skills, experience, and projects.";
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${title} | Sathiyaseelan Portfolio`,
     description,

@@ -100,7 +100,7 @@ const MarqueeRow = ({ items, direction, duration }) => {
 const AwsCredlyBadge = () => {
   return (
     <motion.div
-      className="relative mx-auto mt-14 w-full max-w-5xl overflow-hidden px-4 sm:mt-16 sm:px-6"
+      className="relative mx-auto mt-14 w-full max-w-5xl overflow-hidden sm:mt-16 sm:px-6"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}

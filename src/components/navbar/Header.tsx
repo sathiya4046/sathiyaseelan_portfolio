@@ -25,7 +25,7 @@ export default function Header({ toggleTheme, theme }: HeaderProps) {
 
   return (
     <motion.header
-      className="fixed left-5 right-5 top-5 z-50 sm:left-10 sm:right-10"
+      className="fixed left-3 right-3 top-5 z-50 sm:left-10 sm:right-10"
       initial={reduceMotion ? false : { y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}

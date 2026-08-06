@@ -45,7 +45,7 @@ const ProjectCard = ({ project, index, onOpenDetail }) => {
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       custom={index}
-      className={`${glassCard} ${glassCardHover} group flex flex-col`}
+      className={`${glassCard} ${glassCardHover} group flex flex-col m-3 md:m-0`}
       whileHover={{ y: -6, scale: 1.005 }}
       transition={{ type: "spring", stiffness: 260, damping: 22 }}
     >

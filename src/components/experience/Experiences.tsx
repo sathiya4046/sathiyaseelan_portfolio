@@ -7,7 +7,6 @@ import {
   useMemo,
   useRef,
   useState,
-  type ReactNode,
 } from "react";
 import {
   motion,
@@ -195,87 +194,16 @@ const ExperienceCard = memo(function ExperienceCard({
     </div>
   );
 
-  const card: ReactNode = (
-    <article
-      className={`group relative flex h-full flex-col rounded-2xl border p-5 transition-colors duration-300 sm:p-6 lg:p-7 ${
-        isCurrent
-          ? "border-cyan-400/30 bg-base-200/40"
-          : "border-base-content/10 bg-base-200/25"
-      } hover:border-cyan-400/25 focus-within:border-cyan-400/30`}
-    >
-      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0 flex-1">
-          <div className="mb-1 flex flex-wrap items-center gap-2">
-            <h3 className="text-base font-bold leading-snug text-base-content sm:text-lg lg:text-xl">
-              {exp.company}
-            </h3>
-            {isCurrent && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/35 bg-cyan-400/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-700 dark:text-cyan-300 sm:text-xs">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
-                Current
-              </span>
-            )}
-          </div>
-          <p className="text-sm font-medium text-purple-600 dark:text-purple-400/90 sm:text-base">
-            {exp.role}
-          </p>
-        </div>
-        <time className="shrink-0 rounded-lg border border-base-content/10 bg-base-300/30 px-2.5 py-1 font-mono text-xs text-base-content/60 sm:text-sm">
-          {exp.duration}
-        </time>
-      </div>
-
-      {exp.tags.length > 0 && (
-        <div className="mb-4 flex flex-wrap gap-2">
-          {exp.tags.map((tag, i) => (
-            <TagChip key={tag} index={i}>
-              {tag}
-            </TagChip>
-          ))}
-        </div>
-      )}
-
-      <ul className="flex flex-1 flex-col gap-3">
-        {visiblePoints.map((pt, i) => (
-          <li
-            key={`${i}-${pt.slice(0, 24)}`}
-            className="flex gap-2.5 text-sm leading-relaxed text-base-content/70 sm:text-[0.95rem]"
-          >
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400" />
-            <span>{pt}</span>
-          </li>
-        ))}
-      </ul>
-
-      {exp.points.length > 2 && (
-        <button
-          type="button"
-          onClick={toggle}
-          aria-expanded={expanded}
-          className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-semibold text-cyan-600 transition-colors hover:text-cyan-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 dark:text-cyan-400"
-        >
-          {expanded ? "Show less" : "Read more"}
-          <span
-            className={`text-[10px] transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
-            aria-hidden
-          >
-            ▼
-          </span>
-        </button>
-      )}
-    </article>
-  );
-
   return (
     <motion.li
       ref={cardRef}
-      className="relative grid grid-cols-[2.75rem_minmax(0,1fr)] gap-3 sm:gap-4 lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)] lg:gap-8"
+      className="relative grid grid-cols-1 gap-0 lg:grid-cols-[minmax(0,1fr)_3rem_minmax(0,1fr)] lg:gap-8"
       initial={reduceMotion ? false : { opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08, ease: EASE_PREMIUM }}
     >
-      {/* Timeline column (mobile col 1 / desktop center) */}
-      <div className="relative col-start-1 row-start-1 flex flex-col items-center lg:col-start-2">
+      {/* Desktop timeline column only — no connector line on mobile */}
+      <div className="relative col-start-1 row-start-1 hidden flex-col items-center pt-6 lg:col-start-2 lg:flex">
         {node}
         {!isLast && (
           <div
@@ -285,16 +213,90 @@ const ExperienceCard = memo(function ExperienceCard({
         )}
       </div>
 
-      {/* Card — single instance */}
       <div
-        className={`col-start-2 row-start-1 min-w-0 lg:row-start-1 ${
-          isRight ? "lg:col-start-3" : "lg:col-start-1 lg:text-left"
+        className={`min-w-0 lg:row-start-1 ${
+          isRight ? "lg:col-start-3" : "lg:col-start-1"
         }`}
       >
-        {card}
+        <article
+          className={`group relative flex h-full flex-col rounded-2xl border p-4 transition-colors duration-300 sm:p-6 lg:p-7 ${
+            isCurrent
+              ? "border-cyan-400/30 bg-base-200/40"
+              : "border-base-content/10 bg-base-200/25"
+          } hover:border-cyan-400/25 focus-within:border-cyan-400/30`}
+        >
+          {/* Header */}
+          <div className="mb-4 flex gap-3 sm:gap-4">
+            {/* Initials sit inside the card on mobile only */}
+            <div className="shrink-0 lg:hidden">{node}</div>
+
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+                <div className="min-w-0">
+                  <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                    <h3 className="break-words text-[0.95rem] font-bold leading-snug text-base-content sm:text-lg lg:text-xl">
+                      {exp.company}
+                    </h3>
+                    {isCurrent && (
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/35 bg-cyan-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-700 dark:text-cyan-300">
+                        <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
+                        Current
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm font-medium text-purple-700 dark:text-purple-300 sm:text-base">
+                    {exp.role}
+                  </p>
+                </div>
+
+                <time className="w-fit shrink-0 rounded-lg border border-base-content/10 bg-base-300/30 px-2.5 py-1 font-mono text-[11px] text-base-content/65 sm:text-sm">
+                  {exp.duration}
+                </time>
+              </div>
+            </div>
+          </div>
+
+          {exp.tags.length > 0 && (
+            <div className="mb-4 flex flex-wrap gap-1.5 sm:gap-2">
+              {exp.tags.map((tag, i) => (
+                <TagChip key={tag} index={i}>
+                  {tag}
+                </TagChip>
+              ))}
+            </div>
+          )}
+
+          <ul className="flex flex-1 flex-col gap-2.5 sm:gap-3">
+            {visiblePoints.map((pt, i) => (
+              <li
+                key={`${i}-${pt.slice(0, 24)}`}
+                className="flex gap-2.5 text-[13px] leading-relaxed text-base-content/70 sm:text-[0.95rem]"
+              >
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400" />
+                <span className="min-w-0">{pt}</span>
+              </li>
+            ))}
+          </ul>
+
+          {exp.points.length > 2 && (
+            <button
+              type="button"
+              onClick={toggle}
+              aria-expanded={expanded}
+              className="mt-4 inline-flex min-h-10 w-fit items-center gap-1.5 rounded-md px-1 text-sm font-semibold text-cyan-600 transition-colors hover:text-cyan-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 dark:text-cyan-400"
+            >
+              {expanded ? "Show less" : "Read more"}
+              <span
+                className={`text-[10px] transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
+                aria-hidden
+              >
+                ▼
+              </span>
+            </button>
+          )}
+        </article>
       </div>
 
-      {/* Desktop empty opposite cell for balance */}
       <div
         className={`hidden lg:block ${isRight ? "lg:col-start-1" : "lg:col-start-3"}`}
         aria-hidden
